@@ -11,10 +11,16 @@ import {
 import Order from '@modules/orders/infra/typeorm/entities/Order';
 import Product from '@modules/products/infra/typeorm/entities/Product';
 
-@Entity('ordersProducts')
+@Entity('orders_products')
 class OrdersProducts {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Column()
+  order_id: string;
+
+  @Column()
+  product_id: string;
 
   @ManyToOne(() => Order)
   @JoinColumn({ name: 'order_id' })
@@ -23,12 +29,6 @@ class OrdersProducts {
   @ManyToOne(() => Product)
   @JoinColumn({ name: 'product_id' })
   product: Product;
-
-  @Column()
-  product_id: string;
-
-  @Column()
-  order_id: string;
 
   @Column()
   price: number;
